@@ -7,13 +7,13 @@
     <div class="d-flex align-items-center justify-content-between mb-4">
         <h1>Produtos</h1>
         <div>
-            <a class="btn btn-primary" href="{% url 'produto-add' %}" role="button" style="height: min-content;">Adicionar Produto</a>
+            <a class="btn btn-primary" href="{% url 'produto-create' %}" role="button" style="height: min-content;">Adicionar Produto</a>
         </div>
     </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         {% for produto in produtos %}
         <div class="col">
-            <a href="{% url 'produto-details' produto.id %}" class="text-decoration-none text-dark">
+            <a href="{% url 'produto-detail' produto.id %}" class="text-decoration-none text-dark">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">{{ produto.nome }}</h5>

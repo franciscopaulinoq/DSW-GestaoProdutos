@@ -1,12 +1,12 @@
 from django.urls import path
-from .views import ProdutosView, ProdutoDetailsView, CategoriasView, FornecedoresView, ProdutosAddView, CategoriaAddView, FornecedorAddView
+from .views import *
 
 urlpatterns = [
-    path('produtos/', ProdutosView, name="produtos"),
-    path('produto/add/', ProdutosAddView, name='produto-add'),
-    path('produto/<int:produto_id>', ProdutoDetailsView, name="produto-details"),
-    path('categorias/', CategoriasView, name="categorias"),
-    path('categoria/add/', CategoriaAddView, name='categoria-add'),
-    path('fornecedores/', FornecedoresView, name="fornecedores"),
-    path('fornecedor/add/', FornecedorAddView, name='fornecedor-add'),
+    path('produtos/', produto_list, name="produtos"),
+    path('produto/add/', produto_create, name='produto-add'),
+    path('produto/<int:produto_id>', produto_detail, name="produto-detail"),
+    path('categorias/', categoria_list, name="categorias"),
+    path('categoria/add/', categoria_create, name='categoria-add'),
+    path('fornecedores/', fornecedor_list, name="fornecedores"),
+    path('fornecedor/add/', fornecedor_create, name='fornecedor-add'),
 ]
