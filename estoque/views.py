@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render, HttpResponseRedirect
 from django.urls import reverse
 from .models import Categoria, Fornecedor, Produto
-from .forms import ProdutoForm
+from .forms import  CategoriaForm, FornecedorForm, ProdutoForm
 
 # Create your views here.
 
@@ -39,7 +39,36 @@ def CategoriasView(request):
     context = {'categorias': categorias}
     return render(request, "categorias.html", context)
 
+def CategoriaAddView(request):
+    if request.method == "POST":
+        form = CategoriaForm(request.POST)
+        if form.is_valid():
+            categoria = Categoria()
+            categoria.nome = form.cleaned_data['nome']
+            categoria.save()
+            return HttpResponseRedirect(reverse('categorias'))
+    else:
+        form = CategoriaForm()
+    
+    return render(request, 'categoria-add.html', {'form': form})
+
 def FornecedoresView(request):
     fornecedores = Fornecedor.objects.all()
     context = {'fornecedores': fornecedores}
     return render(request, "fornecedores.html", context)
+
+def FornecedorAddView(request):
+    if request.method == "POST":
+        form = FornecedorForm(request.POST)
+        if form.is_valid():
+            fornecedor = Fornecedor()
+            fornecedor.nome = form.cleaned_data['nome']
+            fornecedor.cnpj = form.cleaned_data['cnpj']
+            fornecedor.telefone = form.cleaned_data['telefone']
+            fornecedor.email = form.cleaned_data['email']
+            fornecedor.save()
+            return HttpResponseRedirect(reverse('fornecedores'))
+    else:
+        form = FornecedorForm()
+
+    return render(request, 'fornecedor-add.html', {'form': form})

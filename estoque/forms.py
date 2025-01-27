@@ -14,3 +14,12 @@ class ProdutoForm(forms.Form):
     fornecedor = forms.ModelChoiceField(
         queryset=Fornecedor.objects.all(), 
         label="Fornecedor")
+
+class CategoriaForm(forms.Form):
+    nome = forms.CharField(max_length=250, label="Nome")
+
+class FornecedorForm(forms.Form):
+    nome = forms.CharField(max_length=250, label="Nome")
+    cnpj = forms.CharField(max_length=14, label="CNPJ")
+    telefone = forms.CharField(max_length=11, label="Telefone")
+    email = forms.EmailField(max_length=254)
