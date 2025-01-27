@@ -7,7 +7,22 @@
     <h1 class="text-center mb-4">Cadastro de Fornecedor</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div style="background-color: aqua;">
+            <label for="id_nome">Nome:</label>
+            <input type="text" name="nome" maxlength="250" required id="id_nome">
+        </div>
+        <div style="background-color: aqua;">
+            <label for="id_cnpj">CNPJ:</label>
+            <input type="text" name="cnpj" maxlength="14" required id="id_cnpj">
+        </div>
+        <div style="background-color: aqua;">
+            <label for="id_telefone">Telefone:</label>
+            <input type="text" name="telefone" maxlength="11" required id="id_telefone">
+        </div>
+        <div style="background-color: aqua;">
+            <label for="id_email">Email:</label>
+            <input type="email" name="email" maxlength="254" required id="id_email">
+        </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 </div>

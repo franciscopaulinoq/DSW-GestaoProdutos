@@ -16,6 +16,8 @@ def ProdutoDetailsView(request, produto_id):
     return render(request, "produto-details.html", context)
 
 def ProdutosAddView(request):
+    categorias = Categoria.objects.all()
+    fornecedores = Fornecedor.objects.all()
     if request.method == "POST":
         form = ProdutoForm(request.POST)
         if form.is_valid():
@@ -32,7 +34,7 @@ def ProdutosAddView(request):
     else:
         form = ProdutoForm()
     
-    return render(request, 'produto-add.html', {'form': form})
+    return render(request, 'produto-add.html', {'form': form, 'categorias': categorias, 'fornecedores': fornecedores})
 
 def CategoriasView(request):
     categorias = Categoria.objects.all()

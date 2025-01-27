@@ -7,7 +7,10 @@
     <h1 class="text-center mb-4">Cadastro de Categoria</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div style="background-color: aqua;">
+            <label for="id_nome">Nome:</label>
+            <input type="text" name="nome" maxlength="250" required id="id_nome">
+        </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 </div>

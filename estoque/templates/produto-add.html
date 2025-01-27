@@ -7,7 +7,45 @@
     <h1 class="text-center mb-4">Cadastro de Produto</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div style="background-color: aqua;">
+            <label for="id_nome">Nome:</label>
+            <input type="text" name="nome" maxlength="250" required id="id_nome">
+        </div>
+        <div style="background-color: aqua;">
+            <label for="id_codigo">Código:</label>
+            <input type="text" name="codigo" maxlength="15" required id="id_codigo">
+        </div>
+        <div style="background-color: aqua;">
+            <label for="id_descricao">Descrição:</label>
+            <textarea name="descricao" cols="40" rows="10" id="id_descricao"></textarea>
+        </div>
+        <div style="background-color: aqua;">
+            <label for="id_preco">Preço:</label>
+            <input type="number" name="preco" step="0.01" required id="id_preco">
+        </div>
+        <div style="background-color: aqua;">
+            <label for="id_quantidade_estoque">Quantidade em Estoque:</label>
+            <input type="number" name="quantidade_estoque" required id="id_quantidade_estoque">
+        </div>
+        <div id="id_categorias" style="background-color: aqua;">
+            {% for categoria in categorias %}
+            <div>
+                <label for="id_categorias_{{categoria.id}}">
+                    <input type="checkbox" name="categorias" value="{{categoria.id}}"
+                        id="id_categorias_{{categoria.id}}"> {{categoria.nome}}
+                </label>
+            </div>
+            {% endfor %}
+        </div>
+        <div style="background-color: aqua;">
+            <label for="id_fornecedor">Fornecedor:</label>
+            <select name="fornecedor" required id="id_fornecedor">
+                <option value="" selected="">---------</option>
+                {% for fornecedor in fornecedores %}
+                <option value="{{fornecedor.id}}">{{fornecedor.nome}}</option>
+                {% endfor %}
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 </div>
