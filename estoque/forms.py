@@ -19,6 +19,14 @@ class ProdutoForm(forms.Form):
 class CategoriaForm(forms.Form):
     nome = forms.CharField(max_length=250, label="Nome")
 
+    def clean_nome(self):
+        nome = self.cleaned_data.get('nome')
+        categoria = Categoria.objects.filter(nome=nome)
+
+        if categoria:
+            raise forms.ValidationError("Já Existe uma Categoria com Esse Nome.")
+        return nome
+
 class FornecedorForm(forms.Form):
     nome = forms.CharField(max_length=250, label="Nome")
     cnpj = forms.CharField(max_length=14, label="CNPJ")
