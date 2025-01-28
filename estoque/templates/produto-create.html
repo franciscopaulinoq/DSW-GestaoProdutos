@@ -5,48 +5,61 @@
 {% block content %}
 <div class="container my-5">
     <h1 class="text-center mb-4">Cadastro de Produto</h1>
-    <form method="post">
+    <form method="post" class="p-4">
         {% csrf_token %}
-        <div style="background-color: aqua;">
-            <label for="id_nome">Nome:</label>
-            <input type="text" name="nome" maxlength="250" required id="id_nome">
-        </div>
-        <div style="background-color: aqua;">
-            <label for="id_codigo">Código:</label>
-            <input type="text" name="codigo" maxlength="15" required id="id_codigo">
-        </div>
-        <div style="background-color: aqua;">
-            <label for="id_descricao">Descrição:</label>
-            <textarea name="descricao" cols="40" rows="10" id="id_descricao"></textarea>
-        </div>
-        <div style="background-color: aqua;">
-            <label for="id_preco">Preço:</label>
-            <input type="number" name="preco" step="0.01" required id="id_preco">
-        </div>
-        <div style="background-color: aqua;">
-            <label for="id_quantidade_estoque">Quantidade em Estoque:</label>
-            <input type="number" name="quantidade_estoque" required id="id_quantidade_estoque">
-        </div>
-        <div id="id_categorias" style="background-color: aqua;">
-            {% for categoria in categorias %}
-            <div>
-                <label for="id_categorias_{{categoria.id}}">
-                    <input type="checkbox" name="categorias" value="{{categoria.id}}"
-                        id="id_categorias_{{categoria.id}}"> {{categoria.nome}}
-                </label>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="id_nome" class="form-label">Nome:</label>
+                <input type="text" name="nome" maxlength="250" required id="id_nome" class="form-control"
+                    placeholder="Digite o Nome do Produto">
             </div>
-            {% endfor %}
+            <div class="col-md-6">
+                <label for="id_codigo" class="form-label">Código:</label>
+                <input type="text" name="codigo" maxlength="15" required id="id_codigo" class="form-control"
+                    placeholder="Digite o Código do Produto">
+            </div>
+            <div class="col-12">
+                <label for="id_descricao" class="form-label">Descrição:</label>
+                <textarea name="descricao" cols="40" rows="4" id="id_descricao" class="form-control"
+                    placeholder="Digite a Descrição do Produto"></textarea>
+            </div>
+            <div class="col-md-6">
+                <label for="id_preco" class="form-label">Preço:</label>
+                <input type="number" name="preco" step="0.01" required id="id_preco" class="form-control"
+                    placeholder="Digite o Preço do Produto">
+            </div>
+            <div class="col-md-6">
+                <label for="id_quantidade_estoque" class="form-label">Quantidade em Estoque:</label>
+                <input type="number" name="quantidade_estoque" required id="id_quantidade_estoque" class="form-control"
+                    placeholder="Digite a Quantidade em Estoque">
+            </div>
+            <div class="col-12">
+                <label class="form-label">Categorias:</label>
+                <div id="id_categorias" class="border rounded p-3">
+                    {% for categoria in categorias %}
+                    <div class="form-check">
+                        <input type="checkbox" name="categorias" value="{{categoria.id}}"
+                            id="id_categorias_{{categoria.id}}" class="form-check-input">
+                        <label for="id_categorias_{{categoria.id}}" class="form-check-label">
+                            {{categoria.nome}}
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-12">
+                <label for="id_fornecedor" class="form-label">Fornecedor:</label>
+                <select name="fornecedor" required id="id_fornecedor" class="form-select">
+                    <option value="" selected>---------</option>
+                    {% for fornecedor in fornecedores %}
+                    <option value="{{fornecedor.id}}">{{fornecedor.nome}}</option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
-        <div style="background-color: aqua;">
-            <label for="id_fornecedor">Fornecedor:</label>
-            <select name="fornecedor" required id="id_fornecedor">
-                <option value="" selected="">---------</option>
-                {% for fornecedor in fornecedores %}
-                <option value="{{fornecedor.id}}">{{fornecedor.nome}}</option>
-                {% endfor %}
-            </select>
+        <div class="d-flex justify-content-end mt-4">
+            <button type="submit" class="btn btn-primary">Salvar</button>
         </div>
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 </div>
 {% endblock %}

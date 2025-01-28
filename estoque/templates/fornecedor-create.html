@@ -5,25 +5,35 @@
 {% block content %}
 <div class="container my-5">
     <h1 class="text-center mb-4">Cadastro de Fornecedor</h1>
-    <form method="post">
-        {% csrf_token %}
-        <div style="background-color: aqua;">
-            <label for="id_nome">Nome:</label>
-            <input type="text" name="nome" maxlength="250" required id="id_nome">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <form method="post" class="card shadow-sm p-4">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_nome" class="form-label">Nome:</label>
+                    <input type="text" name="nome" maxlength="250" required id="id_nome" class="form-control"
+                        placeholder="Digite o Nome do Fornecedor">
+                </div>
+                <div class="mb-3">
+                    <label for="id_cnpj" class="form-label">CNPJ:</label>
+                    <input type="text" name="cnpj" maxlength="14" required id="id_cnpj" class="form-control"
+                        placeholder="Digite o CNPJ do Fornecedor">
+                </div>
+                <div class="mb-3">
+                    <label for="id_telefone" class="form-label">Telefone:</label>
+                    <input type="text" name="telefone" maxlength="11" required id="id_telefone" class="form-control"
+                        placeholder="Digite o Telefone do Fornecedor">
+                </div>
+                <div class="mb-3">
+                    <label for="id_email" class="form-label">Email:</label>
+                    <input type="email" name="email" maxlength="254" required id="id_email" class="form-control"
+                        placeholder="Digite o E-mail do Fornecedor">
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
         </div>
-        <div style="background-color: aqua;">
-            <label for="id_cnpj">CNPJ:</label>
-            <input type="text" name="cnpj" maxlength="14" required id="id_cnpj">
-        </div>
-        <div style="background-color: aqua;">
-            <label for="id_telefone">Telefone:</label>
-            <input type="text" name="telefone" maxlength="11" required id="id_telefone">
-        </div>
-        <div style="background-color: aqua;">
-            <label for="id_email">Email:</label>
-            <input type="email" name="email" maxlength="254" required id="id_email">
-        </div>
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
-    </form>
+    </div>
 </div>
 {% endblock %}

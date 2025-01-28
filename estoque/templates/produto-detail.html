@@ -1,41 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalhes do Produto</title>
+{% block title %}Detalhes do Produto{% endblock %}
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">Detalhes do Produto</h1>
 
-<body>
-    <div class="container my-5">
-        <h1 class="text-center mb-4">Detalhes do Produto</h1>
+    <a href="{% url 'produtos' %}" class="btn mb-4">← Voltar para lista de produtos</a>
 
-        <a href="{% url 'produtos' %}" class="btn mb-4">← Voltar para lista de produtos</a>
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">{{produto.nome}}</h2>
+            <h4 class="text-success">Preço: R$ {{produto.preco}}</h4>
 
-        <div class="card">
-            <div class="card-body">
-                <h2 class="card-title">{{produto.nome}}</h2>
-                <h4 class="text-success">Preço: R$ {{produto.preco}}</h4>
+            <p class="mt-3"><strong>Descrição:</strong>
+                <span class="text-muted">{{produto.descricao}}</span>
+            </p>
 
-                <p class="mt-3"><strong>Descrição:</strong>
-                    <span class="text-muted">{{produto.descricao}}</span>
-                </p>
+            <p><strong>Quantidade em Estoque:</strong> {{produto.quantidade_estoque}} unidades</p>
 
-                <p><strong>Quantidade:</strong> {{produto.quantidade_estoque}} unidades</p>
+            <p><strong>Fornecedor:</strong> {{produto.fornecedor}}</p>
 
-                <p><strong>Fornecedor:</strong> {{produto.fornecedor}}</p>
-
-                <p><strong>Categorias:</strong>
-                    {% for categoria in produto.categorias.all %}
-                    <span class="badge bg-secondary">{{categoria}}</span>
-                    {% endfor %}
-                </p>
-            </div>
+            <p><strong>Categorias:</strong>
+                {% for categoria in produto.categorias.all %}
+                <span class="badge bg-secondary">{{categoria}}</span>
+                {% endfor %}
+            </p>
         </div>
     </div>
-</body>
-
-</html>
+</div>
+{% endblock %}
