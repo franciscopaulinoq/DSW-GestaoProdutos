@@ -1,7 +1,13 @@
 from django.shortcuts import get_object_or_404, render, HttpResponseRedirect
 from django.urls import reverse
+from django.views.generic import ListView
 from estoque.models import Categoria, Fornecedor, Produto
 from estoque.forms import  ProdutoForm
+
+class ProdutoListView(ListView):
+    model = Produto
+    template_name = "produto.html"
+    context_object_name = 'produtos'
 
 def produto_list(request):
     produtos = Produto.objects.all()

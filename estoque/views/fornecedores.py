@@ -1,7 +1,13 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
+from django.views.generic import ListView
 from estoque.models import Fornecedor
 from estoque.forms import  FornecedorForm
+
+class FornecedorListView(ListView):
+    model = Fornecedor
+    template_name = "fornecedor.html"
+    context_object_name = 'fornecedores'
 
 def fornecedor_list(request):
     fornecedores = Fornecedor.objects.all()

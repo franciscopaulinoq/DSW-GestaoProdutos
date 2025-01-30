@@ -12,11 +12,17 @@
                 <label for="id_nome" class="form-label">Nome:</label>
                 <input type="text" name="nome" maxlength="250" required id="id_nome" class="form-control"
                     placeholder="Digite o Nome do Produto">
+                {% if form.nome.errors %}
+                <div class="text-danger">{{ form.nome.errors|join:"<br>" }}</div>
+                {% endif %}
             </div>
             <div class="col-md-6">
                 <label for="id_codigo" class="form-label">Código:</label>
                 <input type="text" name="codigo" maxlength="15" required id="id_codigo" class="form-control"
                     placeholder="Digite o Código do Produto">
+                {% if form.codigo.errors %}
+                <div class="text-danger">{{ form.codigo.errors|join:"<br>" }}</div>
+                {% endif %}
             </div>
             <div class="col-12">
                 <label for="id_descricao" class="form-label">Descrição:</label>
@@ -27,11 +33,17 @@
                 <label for="id_preco" class="form-label">Preço:</label>
                 <input type="number" name="preco" step="0.01" required id="id_preco" class="form-control"
                     placeholder="Digite o Preço do Produto">
+                {% if form.preco.errors %}
+                <div class="text-danger">{{ form.preco.errors|join:"<br>" }}</div>
+                {% endif %}
             </div>
             <div class="col-md-6">
                 <label for="id_quantidade_estoque" class="form-label">Quantidade em Estoque:</label>
                 <input type="number" name="quantidade_estoque" required id="id_quantidade_estoque" class="form-control"
                     placeholder="Digite a Quantidade em Estoque">
+                {% if form.quantidade_estoque.errors %}
+                <div class="text-danger">{{ form.quantidade_estoque.errors|join:"<br>" }}</div>
+                {% endif %}
             </div>
             <div class="col-12">
                 <label class="form-label">Categorias:</label>

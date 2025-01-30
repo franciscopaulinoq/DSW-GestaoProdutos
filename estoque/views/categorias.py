@@ -1,7 +1,13 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
+from django.views.generic import ListView
 from estoque.models import Categoria
 from estoque.forms import  CategoriaForm
+
+class CategoriaListView(ListView):
+    model = Categoria
+    template_name = "categoria.html"
+    context_object_name = 'categorias'
 
 def categoria_list(request):
     categorias = Categoria.objects.all()
