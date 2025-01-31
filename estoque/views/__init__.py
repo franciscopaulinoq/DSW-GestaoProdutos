@@ -1,16 +1,13 @@
-from .categorias import categoria_list, categoria_create, CategoriaListView
-from .fornecedores import fornecedor_list, fornecedor_create, FornecedorListView
-from .produtos import produto_list, produto_create, produto_detail, ProdutoListView
+from .categorias import CategoriaCreateView, CategoriaListView
+from .fornecedores import FornecedorCreateView, FornecedorListView
+from .produtos import ProdutoCreateView, ProdutoDetailView, ProdutoListView
 
 __all__ = [
-    'categoria_list',
-    'categoria_create',
+    'CategoriaCreateView',
     'CategoriaListView',
-    'fornecedor_list',
-    'fornecedor_create',
+    'FornecedorCreateView',
     'FornecedorListView',
-    'produto_list',
-    'produto_create',
-    'produto_detail',
+    'ProdutoCreateView',
+    'ProdutoDetailView',
     'ProdutoListView'
 ]
