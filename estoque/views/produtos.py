@@ -10,6 +10,18 @@ class ProdutoListView(ListView):
     context_object_name = 'produtos'
     paginate_by = 5
 
+    def get_queryset(self):
+        q_nome = self.request.GET.get('nome')
+        q_p_min = self.request.GET.get('p_min')
+        q_p_max = self.request.GET.get('p_max')
+        if (q_p_min and q_p_max):
+            object_list = self.model.objects.filter(nome__icontains=q_nome)
+        if q_nome:
+            object_list = self.model.objects.filter(nome__icontains=q_nome)
+        else:
+            object_list = self.model.objects.all()
+        return object_list
+
 class ProdutoCreateView(CreateView):
     model = Produto
     form_class = ProdutoForm
