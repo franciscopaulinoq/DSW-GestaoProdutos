@@ -6,17 +6,26 @@
 <div class="container my-5">
     <div class="d-flex align-items-center justify-content-between mb-4">
         <h1>Produtos</h1>
-        <div>
-            <a class="btn btn-primary" href="{% url 'produto-create' %}" role="button"
-                style="height: min-content;">Adicionar Produto</a>
-        </div>
+        <a class="btn btn-primary" href="{% url 'produto-create' %}" role="button">Adicionar Produto</a>
     </div>
-    <div>
-        <form method="get">
-            <input type="text" name="nome">
-            <button type="submit">Pesquisar</button>
+
+    <div class="mb-4">
+        <form action="{% url 'produtos' %}" method="get" class="d-flex gap-2">
+            <input type="text" name="nome" class="form-control" placeholder="Nome do produto"
+                value="{{ request.GET.nome }}">
+            <input type="number" name="p_min" step="0.01" class="form-control" placeholder="Preço mínimo"
+                value="{{ request.GET.p_min }}">
+            <input type="number" name="p_max" step="0.01" class="form-control" placeholder="Preço máximo"
+                value="{{ request.GET.p_max }}">
+            <button type="submit" class="btn btn-secondary">
+                <i class="fas fa-search"></i>
+            </button>
+            <a href="{% url 'produtos' %}" class="btn btn-danger">
+                <i class="fas fa-times"></i>
+            </a>
         </form>
     </div>
+
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         {% for produto in produtos %}
         <div class="col">
@@ -29,21 +38,42 @@
                 </div>
             </a>
         </div>
+        {% empty %}
+        <p class="text-muted">Nenhum produto encontrado.</p>
         {% endfor %}
     </div>
-    <div>
-        {% if page_obj.has_previous %}
-        <a href="?page=1">1</a>
-        <a href="?page={{ page_obj.previous_page_number }}">
-            << /a>
+
+    <div class="d-flex justify-content-center mt-4">
+        <nav>
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link"
+                        href="{% url 'produtos-list-paginated' 1 %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                        href="{% url 'produtos-list-paginated' page_obj.previous_page_number %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}">&laquo;</a>
+                </li>
                 {% endif %}
-                <span>
-                    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
-                </span>
+
+                <li class="page-item active">
+                    <span class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+                </li>
+
                 {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">></a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+                <li class="page-item">
+                    <a class="page-link"
+                        href="{% url 'produtos-list-paginated' page_obj.next_page_number %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}">&raquo;</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                        href="{% url 'produtos-list-paginated' page_obj.paginator.num_pages %}{% if request.GET %}?{{ request.GET.urlencode }}{% endif %}">{{page_obj.paginator.num_pages }}</a>
+                </li>
                 {% endif %}
+            </ul>
+        </nav>
     </div>
+
 </div>
 {% endblock %}

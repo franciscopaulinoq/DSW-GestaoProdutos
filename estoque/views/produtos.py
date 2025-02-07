@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView
 from estoque.models import Categoria, Fornecedor, Produto
@@ -7,19 +7,23 @@ from estoque.forms import  ProdutoForm
 class ProdutoListView(ListView):
     model = Produto
     template_name = "produto.html"
-    context_object_name = 'produtos'
+    context_object_name = "produtos"
     paginate_by = 5
 
     def get_queryset(self):
-        q_nome = self.request.GET.get('nome')
-        q_p_min = self.request.GET.get('p_min')
-        q_p_max = self.request.GET.get('p_max')
-        if (q_p_min and q_p_max):
-            object_list = self.model.objects.filter(nome__icontains=q_nome)
+        q_nome = self.request.GET.get("nome", "")
+        q_p_min = self.request.GET.get("p_min")
+        q_p_max = self.request.GET.get("p_max")
+
+        object_list = self.model.objects.all()
+
         if q_nome:
-            object_list = self.model.objects.filter(nome__icontains=q_nome)
-        else:
-            object_list = self.model.objects.all()
+            object_list = object_list.filter(nome__icontains=q_nome)
+        if q_p_min:
+            object_list = object_list.filter(preco__gte=float(q_p_min))
+        if q_p_max:
+            object_list = object_list.filter(preco__lte=float(q_p_max))
+
         return object_list
 
 class ProdutoCreateView(CreateView):
