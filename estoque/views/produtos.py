@@ -1,10 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView
 from estoque.models import Categoria, Fornecedor, Produto
 from estoque.forms import  ProdutoForm
 
-class ProdutoListView(ListView):
+class ProdutoListView(LoginRequiredMixin, ListView):
     model = Produto
     template_name = "produto.html"
     context_object_name = "produtos"
@@ -26,7 +27,7 @@ class ProdutoListView(ListView):
 
         return object_list
 
-class ProdutoCreateView(CreateView):
+class ProdutoCreateView(LoginRequiredMixin, CreateView):
     model = Produto
     form_class = ProdutoForm
     template_name = "produto-create.html"
@@ -46,7 +47,7 @@ class ProdutoCreateView(CreateView):
 
         return context
 
-class ProdutoDetailView(DetailView):
+class ProdutoDetailView(LoginRequiredMixin, DetailView):
     model = Produto
     template_name = "produto-detail.html"
     context_object_name = "produto"

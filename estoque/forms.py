@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .models import Categoria, Fornecedor, Produto
 import re
@@ -107,3 +109,11 @@ class FornecedorForm(forms.ModelForm):
 #         if email and not re.match(r'^\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b$', email):
 #             raise forms.ValidationError("Digite um Endereço de E-mail Válido.")
 #         return email
+
+class CustomUserCreationForm(UserCreationForm):
+    first_name = forms.CharField(max_length=30, required=True, label="Nome")
+    last_name = forms.CharField(max_length=30, required=True, label="Sobrenome")
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'password1', 'password2']

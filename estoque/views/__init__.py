@@ -1,6 +1,7 @@
 from .categorias import CategoriaCreateView, CategoriaListView
 from .fornecedores import FornecedorCreateView, FornecedorListView
 from .produtos import ProdutoCreateView, ProdutoDetailView, ProdutoListView
+from .user import LoginPageView, RegisterView
 
 __all__ = [
     'CategoriaCreateView',
@@ -9,5 +10,7 @@ __all__ = [
     'FornecedorListView',
     'ProdutoCreateView',
     'ProdutoDetailView',
-    'ProdutoListView'
+    'ProdutoListView',
+    'LoginPageView',
+    'RegisterView',
 ]
